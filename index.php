@@ -19,25 +19,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     if(empty($email_err) && empty($password_err)){
-        $sql = "SELECT password FROM users WHERE email = ?";
+        $sql = "SELECT password FROM users WHERE email = ? AND password = ?";
 
         if($stmt = mysqli_prepare($link, $sql)){
-            mysqli_stmt_bind_param($stmt, "s", $param_email);
+            mysqli_stmt_bind_param($stmt, "ss", $param_email, $param_password);
 
             $param_email = $email;
+            $param_password = $password;
 
             if(mysqli_stmt_execute($stmt)){
                 $result = mysqli_stmt_get_result($stmt);
-
-                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
-                $correct_password = $row["password"];
-
-                if($correct_password == $password){
+                
+                if(mysqli_num_rows($result) == 1){
+                    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     header("location: create.php");
                     exit();
-                }else{
-                    echo "Wrong password!";
+                }
+                else{
+                    echo "Wrong email or password!";
                 }
                 
             } else{
@@ -67,7 +66,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 class="mt-5 mx-auto" style="width: 100px;">Sign in</h2>
+                    <div class="mx-auto" style="width: 300px;">
+                        <img src="weather-icon.png" width="300" class="mx-auto">
+                    </div>
+                    <h2 class="mx-auto" style="width: 100px;">Sign in</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
                             <label>Email</label>
@@ -79,18 +81,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
                             <span class="invalid-feedback"><?php echo $password_err;?></span>
                         </div>
-                        <div class="mt-3">
-                            <input type="submit" class="btn btn-primary" value="Submit">
-                            <a href="create.php" class="btn btn-secondary ml-2">Sign up</a>
+                        <div class="mt-3 row">
+                            <input type="submit" class="btn btn-primary" value="Log in">
                         </div>
-
-
-                    <!-- <div class="form-group">
-                        <label>Sign in</label>
-                        <h2 class="pull-left">Sign up</h2>
-                        <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Sign up</a>
-                    </div> -->
-                    
+                        <div class="mt-1 row">
+                            <a href="create.php" class="btn btn-dark">Sign up</a>
+                        </div>
+                    </form>
                 </div>
             </div>        
         </div>
