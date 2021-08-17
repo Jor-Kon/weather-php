@@ -11,8 +11,6 @@ $lastname_err = "";
 $email_err = "";
 $password_err = "";
 
-
- 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $input_firstname = trim($_POST["firstname"]);
     if(empty($input_firstname)){
@@ -70,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Record</title>
+    <title>Create user</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </head>
@@ -83,23 +81,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
                             <label>First Name</label>
-                            <input type="text" name="firstname" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $firstname; ?>">
-                            <span class="invalid-feedback"><?php echo $name_err;?></span>
+                            <input type="text" name="firstname" class="form-control <?php echo (!empty($firstname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $firstname; ?>">
+                            <span class="invalid-feedback"><?php echo $firstname_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Last Name</label>
-                            <input type="text" name="lastname" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $lastname; ?>">
-                            <span class="invalid-feedback"><?php echo $name_err;?></span>
+                            <input type="text" name="lastname" class="form-control <?php echo (!empty($lastname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $lastname; ?>">
+                            <span class="invalid-feedback"><?php echo $lastname_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" name="email" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
-                            <span class="invalid-feedback"><?php echo $name_err;?></span>
+                            <input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
+                            <span class="invalid-feedback"><?php echo $email_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" name="password" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
-                            <span class="invalid-feedback"><?php echo $name_err;?></span>
+                            <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
+                            <span class="invalid-feedback"><?php echo $password_err;?></span>
                         </div>
                         <div class="mt-3">
                             <input type="submit" class="btn btn-primary" value="Submit">
