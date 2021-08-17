@@ -19,24 +19,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     if(empty($email_err) && empty($password_err)){
-        $sql = "SELECT password FROM users WHERE email = ? AND password = ?";
+        $sql = "SELECT password FROM users WHERE email = ?";
 
         if($stmt = mysqli_prepare($link, $sql)){
-            mysqli_stmt_bind_param($stmt, "ss", $param_email, $param_password);
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
 
             $param_email = $email;
-            $param_password = $password;
 
             if(mysqli_stmt_execute($stmt)){
                 $result = mysqli_stmt_get_result($stmt);
                 
                 if(mysqli_num_rows($result) == 1){
+
                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                    header("location: create.php");
-                    exit();
-                }
-                else{
-                    echo "Wrong email or password!";
+                    if(password_verify($password, $row["password"])){
+
+                        header("location: weather.php");
+                        exit();
+                    }else{
+
+                        echo "Wrong password!";
+                    }
+                    
+                } else{
+                    echo "Email does not exist in database";
                 }
                 
             } else{

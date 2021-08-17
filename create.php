@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($input_password)){
         $salary_err = "Please enter password.";     
     } else{
-        $password = $input_password;
+        $password = password_hash($input_password, PASSWORD_DEFAULT);
     }
     
     if(empty($firstname_err) && empty($lastname_err) && empty($email_err) && empty($password_err)){
