@@ -40,16 +40,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         header("location: weather.php");
                         exit();
                     }else{
-
-                        echo "Wrong password!";
+                        echo '<script>alert("Wrong password")</script>';
                     }
                     
                 } else{
-                    echo "Email does not exist in database";
+                    echo '<script>alert("Email does not exist in database")</script>';
                 }
                 
             } else{
-                echo "error";
+                echo '<script>alert("Error")</script>';
             }
         }
 

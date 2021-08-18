@@ -55,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 header("location: index.php");
                 exit();
             } else{
-                echo "ERROR";
+                echo '<script>alert("Email is occupied")</script>';
             }
         }
         mysqli_stmt_close($stmt);
