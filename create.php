@@ -13,29 +13,29 @@ $password_err = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $input_firstname = trim($_POST["firstname"]);
-    if(empty($input_firstname)){
-        $name_err = "Please enter firstname.";
+    if(empty($input_firstname) || $firstname == ""){
+        $firstname_err = "Please enter firstname.";
     } else{
         $firstname = $input_firstname;
     }
 
     $input_lastname = trim($_POST["lastname"]);
     if(empty($input_lastname)){
-        $name_err = "Please enter lastname.";
+        $lastname_err = "Please enter lastname.";
     } else{
         $lastname = $input_lastname;
     }
     
     $input_email = trim($_POST["email"]);
     if(empty($input_email)){
-        $address_err = "Please enter email.";     
+        $email_err = "Please enter email.";     
     } else{
         $email = $input_email;
     }
     
     $input_password = trim($_POST["password"]);
     if(empty($input_password)){
-        $salary_err = "Please enter password.";     
+        $password_err = "Please enter password.";     
     } else{
         $password = password_hash($input_password, PASSWORD_DEFAULT);
     }

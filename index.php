@@ -4,6 +4,9 @@ require_once "config.php";
 $email = "";
 $password = "";
 
+$email_err = "";
+$password_err = "";
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $input_email = trim($_POST["email"]);
     if(empty($input_email)){
