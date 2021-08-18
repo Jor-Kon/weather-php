@@ -13,7 +13,7 @@ $password_err = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $input_firstname = trim($_POST["firstname"]);
-    if(empty($input_firstname) || $firstname == ""){
+    if(empty($input_firstname)){
         $firstname_err = "Please enter firstname.";
     } else{
         $firstname = $input_firstname;
@@ -37,7 +37,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($input_password)){
         $password_err = "Please enter password.";     
     } else{
-        $password = password_hash($input_password, PASSWORD_DEFAULT);
+        $password = $input_password;
     }
     
     if(empty($firstname_err) && empty($lastname_err) && empty($email_err) && empty($password_err)){
@@ -49,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_firstname = $firstname;
             $param_lastname = $lastname;
             $param_email = $email;
-            $param_password = $password;
+            $param_password = password_hash($input_password, PASSWORD_DEFAULT);
             
             if(mysqli_stmt_execute($stmt)){
                 header("location: index.php");
